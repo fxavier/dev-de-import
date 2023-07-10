@@ -12,7 +12,7 @@ def merge_orgunits_and_unpivot_columns(df_orgunit, df_datim, files):
     file_count = 0
     for file in files:
         file_count += 1
-        df2 = pd.read_csv(os.path.join('initial_files', file))
+        df2 = pd.read_csv(os.path.join('initial_files', file), encoding='ISO-8859-1')
         df2 = df2.replace(np.nan, '', regex=True)
         df2.columns = df2.columns.str.lstrip()
 
