@@ -68,7 +68,10 @@ def concat_final_files(final_files):
             df_list.append(df)
         except Exception as e:
             logging.error(f"Error reading file {final_file}: {e}")
-    final_df = pd.concat(df_list).drop_duplicates().reset_index(drop=True)
+    # final_df = pd.concat(df_list).drop_duplicates().reset_index(drop=True)
+    for df in df_list:
+        df.drop(df.columns[df.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)
+    final_df = pd.concat(df_list).drop_duplicates().reset_index(drop=True)  
     final_df.to_csv('merged/final_file.csv', index=False)
     return final_df
 
